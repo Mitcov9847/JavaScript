@@ -1,72 +1,61 @@
 const transactions = [];
-let transactionIdCounter = 1;
+let transactionId = 1;
 
-/* Добавляет новую транзакцию.  @param {Event} event. */
 function addTransaction(event) {
     event.preventDefault();
 
-    // Получение данных
     const date = document.getElementById('date').value;
     const amount = parseFloat(document.getElementById('amount').value);
     const description = document.getElementById('description').value;
     const category = document.getElementById('category').value;
 
-    // Создание транзакции
     const transaction = {
-        id: transactionIdCounter++, 
+        id: transactionId++,
         date,
         amount,
         category,
         description
     };
 
-    // Добавление транзакции в массив и таблицу
     transactions.push(transaction);
-    appendTransactionToTable(transaction);
-    calculateTotal(); 
+    addTransactionToTable(transaction);
+    updateTotal();
     document.getElementById('transaction-form').reset();
 }
 
-/* @param {Object} transaction - Транзакция для добавления. */
-function appendTransactionToTable(transaction) {
+function addTransactionToTable(transaction) {
     const table = document.getElementById('transaction-table').getElementsByTagName('tbody')[0];
-    const newRow = table.insertRow();
+    const row = table.insertRow();
 
-    // Установка класса для строки в зависимости от суммы
-    newRow.className = transaction.amount > 0 ? 'income' : 'expense';
-    newRow.dataset.id = transaction.id;
+    row.className = transaction.amount > 0 ? 'income' : 'expense';
+    row.dataset.id = transaction.id;
 
-    newRow.innerHTML = `
+    row.innerHTML = `
         <td>${transaction.id}</td>
         <td>${transaction.date}</td>
         <td>${transaction.category}</td>
-        <td>${transaction.description.split(' ').slice(0, 4).join(' ')}</td>
-        <td><button onclick="deleteTransaction('${transaction.id}')">Удалить</button></td>
+        <td>${transaction.description}</td>
+        <td><button onclick="deleteTransaction(${transaction.id})">Удалить</button></td>
     `;
 
-
-    newRow.addEventListener('click', () => showTransactionDetails(transaction));
+    row.addEventListener('click', () => showDetails(transaction));
 }
 
-/* Удаляет транзакцию. @param {string} id.  */
 function deleteTransaction(id) {
-    // Поиск индекса транзакции по ID
-    const index = transactions.findIndex(transaction => transaction.id === parseInt(id));
+    const index = transactions.findIndex(transaction => transaction.id === id);
     if (index !== -1) {
-        transactions.splice(index, 1); // Удаление транзакции из массива
-        document.querySelector(`[data-id="${id}"]`).remove(); // Удаление строки из таблицы
-        calculateTotal();
+        transactions.splice(index, 1);
+        document.querySelector(`[data-id="${id}"]`).remove();
+        updateTotal();
     }
 }
 
-
-function calculateTotal() {
+function updateTotal() {
     const total = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-    document.getElementById('total-amount').textContent = total.toFixed(2); // показывает общую сумму.
+    document.getElementById('total-amount').textContent = total.toFixed(2);
 }
 
-
-function showTransactionDetails(transaction) {
+function showDetails(transaction) {
     document.getElementById('transaction-details').innerHTML = `
         <p><strong>ID:</strong> ${transaction.id}</p>
         <p><strong>Дата:</strong> ${transaction.date}</p>
@@ -75,6 +64,5 @@ function showTransactionDetails(transaction) {
         <p><strong>Описание:</strong> ${transaction.description}</p>
     `;
 }
-
 
 document.getElementById('transaction-form').addEventListener('submit', addTransaction);
