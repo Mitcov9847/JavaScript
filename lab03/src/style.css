@@ -1,25 +1,45 @@
-.universitatea-destat {
-    display: block;
+.content-sector1 {
+    background-color: rgb(158, 158, 158);
+    height: 750px;
 }
 
-.content-wrapper {}
+.content-wrapper {
 
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    text-align: center;
+    height: 750px;
+}
+
+.content1 {
+    display: flex;
+    justify-content: center;
+}
+
+.finansi {
+    display: flex;
+    width: 200px;
+    margin-top: 50px;
+}
+
+.detali2 {
+    display: flex;
+    justify-content: center;
+}
+
+.tr-style {
+    display: flex;
+    flex-direction: column;
+    width: 500px;
 }
 
 table,
 th,
 td {
-    border: 1px solid black;
+    border: 2px solid rgb(66, 81, 32);
 }
 
 th,
 td {
-    padding: 8px;
-    text-align: left;
+    padding: 10px;
+    text-align: center;
 }
 
 form {
@@ -32,14 +52,11 @@ table {
     margin-top: 20px;
 }
 
-tr.income {
-    background-color: #d4edda;
-}
-
-tr.expense {
-    background-color: #f8d7da;
-}
 
 #transaction-details {
-    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    height: 30px;
+    margin-top: 10px;
+
 }
