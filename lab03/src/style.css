@@ -1,0 +1,45 @@
+.universitatea-destat {
+    display: block;
+}
+
+.content-wrapper {}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    text-align: center;
+}
+
+table,
+th,
+td {
+    border: 1px solid black;
+}
+
+th,
+td {
+    padding: 8px;
+    text-align: left;
+}
+
+form {
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+tr.income {
+    background-color: #d4edda;
+}
+
+tr.expense {
+    background-color: #f8d7da;
+}
+
+#transaction-details {
+    margin-top: 20px;
+}
