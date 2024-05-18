@@ -1,10 +1,7 @@
 const transactions = [];
 let transactionIdCounter = 1;
 
-/**
- * Добавляет новую транзакцию.
- * @param {Event} event.
- */
+/* Добавляет новую транзакцию.  @param {Event} event. */
 function addTransaction(event) {
     event.preventDefault();
 
@@ -39,7 +36,6 @@ function appendTransactionToTable(transaction) {
     newRow.className = transaction.amount > 0 ? 'income' : 'expense';
     newRow.dataset.id = transaction.id;
 
-    // Заполнение строки данными
     newRow.innerHTML = `
         <td>${transaction.id}</td>
         <td>${transaction.date}</td>
@@ -66,7 +62,7 @@ function deleteTransaction(id) {
 
 function calculateTotal() {
     const total = transactions.reduce((sum, transaction) => sum + transaction.amount, 0);
-    document.getElementById('total-amount').textContent = total.toFixed(2); // Отображение общей суммы
+    document.getElementById('total-amount').textContent = total.toFixed(2); // показывает общую сумму.
 }
 
 
